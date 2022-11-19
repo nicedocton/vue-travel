@@ -1,0 +1,337 @@
+//<BUTTONS (a.btn+tab)>====================================================================================================
+.btn {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 32px;
+  color: #FFFFFF;
+	display: inline-flex;
+  align-items: center;
+  padding: 16px 24px;
+  gap: 8px;
+  background: rgba(17, 17, 17, 0.2);
+  border: 1px solid #FFFFFF;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  white-space: nowrap;
+  transition: all 0.3s ease 0s;
+  &.btn-simple {
+    background: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    padding: 12px 16px;
+    height: 44px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  &.btn-red {
+    background: #EB1537;
+    border: 1px solid #EB1537;
+    padding: 12px 16px;
+    height: 44px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  &._active {
+    background: #FFFFFF;
+    backdrop-filter: blur(0);
+    color: #000000;
+  }
+  &.btn-disabled {
+    background-color: #ccc;
+    border-color: #999999;
+    cursor: not-allowed;
+    color: #666666;
+    opacity: 0.7;
+  }
+	@media (min-width: 992px) {
+		&:hover {
+      background: #FFFFFF;
+      backdrop-filter: blur(0);
+      color: #000000;
+		}
+    &.btn-simple {
+      &:hover {
+        background: #eaeaea;
+        backdrop-filter: blur(0);
+        color: #000000;
+      }
+    }
+    &.btn-red {
+      &:hover {
+        background: #e7919f;
+        backdrop-filter: blur(0);
+        color: #ffffff;
+      }
+    }
+    &.btn-disabled {
+      &:hover {
+        background-color: #ccc;
+        border-color: #999999;
+        cursor: not-allowed;
+        color: #666666;
+        opacity: 1;
+      }
+    }
+	}
+  @media (max-width: 767.98px) {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+	&._fw {
+		width: 100%;
+	}
+}
+//</BUTTONS>====================================================================================================
+
+//LANG====================================================================================================
+.lang {
+  display: flex;
+  padding: 0 28px;
+  height: 40px;
+  position: relative;
+  &__btn {
+    display: none;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    li {
+      & + li {
+        margin-left: 28px;
+      }
+      a {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease-in 0s;
+        &:hover {
+          color: #fff;
+        }
+        &._active {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+  @media (min-width: 100px) {
+    padding: 0;
+    height: 40px;
+    &__btn {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 5px 24px 5px 5px;
+      position: relative;
+      transition: all 0.3s ease 0s;
+      &:after {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        top: 10px;
+        right: 0;
+        background: url("../img/icons/caret.svg") center no-repeat;
+        transition: all 0.3s ease 0s;
+      }
+    }
+    ul {
+      width: 40px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .3s ease 0s;
+      position: absolute;
+      bottom: 52px;
+      right: 0;
+      background: #da002b;
+      padding: 20px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      li {
+        display: block;
+        width: 100%;
+        height: 22px;
+        & + li {
+          margin-left: 0;
+          margin-top: 14px;
+        }
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 22px;
+        }
+      }
+    }
+    &._active {
+      ul {
+        opacity: 1;
+        visibility: visible;
+        bottom: 42px;
+      }
+      .lang {
+        &__btn {
+          &:after {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+
+  body._active & {
+    &__btn {
+      color: #111111;
+      &:after {
+        background: url("../img/icons/caret-black.svg") center no-repeat;
+      }
+    }
+  }
+}
+//</LANG>====================================================================================================
+
+//<INPUT (inp+tab)>====================================================================================================
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #999999;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #999999;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #999999;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.input {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  gap: 8px;
+  height: 44px;
+  border: 1px solid #E8E8E8;
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111111;
+  &.error {
+    border-color: #EB1537;
+  }
+}
+textarea.input {
+  padding: 12px 16px;
+  height: auto;
+  resize: none;
+}
+.error-msg {
+  width: 100%;
+  color: #EB1537;
+  text-align: left;
+  margin-top: 4px;
+  font-weight: 500;
+  display: none;
+  .input.error + & {
+    display: block;
+  }
+}
+//</INPUT>====================================================================================================
+
+//<CHECK (chk+tab)>====================================================================================================
+.checkbox {
+	position: relative;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+	&__input {
+		position: absolute;
+		width: 0;
+		height: 0;
+		opacity: 0;
+		visibility: hidden;
+		&:checked + .checkbox__bg,
+    ._active .checkbox__bg {
+			background: #fff url("../img/checkbox-active.svg") center no-repeat;
+		}
+	}
+  &__bg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/checkbox.svg") center no-repeat;
+  }
+  &__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+}
+//</CHECK>====================================================================================================
+
+//<RADIO (chk+tab)>====================================================================================================
+.radio {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  &__input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    &:checked + .radio__bg,
+    ._active .radio__bg {
+      background: #fff url("../img/radio-active.svg") center no-repeat;
+      background-size: 20px 20px;
+    }
+  }
+  &__bg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url("../img/radio.svg") center no-repeat;
+    background-size: 20px 20px;
+  }
+  &__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #111111;
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+}
+//</RADIO>====================================================================================================
