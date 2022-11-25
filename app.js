@@ -1,7 +1,14 @@
 const App = {
 	data() {
 		return {
-			title:"Shet"
+			count: 1
+		}
+	},
+	mounted() {
+		console.log(this.count)
+		this.count = 2;
+		function slideTo(e) {
+			
 		}
 	}
 }
