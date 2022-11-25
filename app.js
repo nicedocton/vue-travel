@@ -4,11 +4,21 @@ const App = {
 			count: 1
 		}
 	},
-	mounted() {
-		console.log(this.count)
-		this.count = 2;
-		function slideTo(e) {
-			
+	methods: {
+		slideTo: (e) => {
+			const elem = document.querySelector('.section[data-slide="' + e + '"]');
+			elem.classList.remove('hidden');
+			VueScrollTo.scrollTo(elem, 1000)
+		},
+		setCountry: (e) => {
+			const btns = document.querySelectorAll('.section .btn-links .btn');
+			console.log(btns)
+			btns.forEach(btn => {
+				if (btn.classList.contains('_active')) {
+					btn.classList.remove('_active')
+				}
+			});
+			e.classList.add('_active');
 		}
 	}
 }

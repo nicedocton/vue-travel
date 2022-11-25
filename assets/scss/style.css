@@ -54,9 +54,9 @@
   font-weight: 100;
   font-style: normal; }
 * {
-  padding: 0px;
-  margin: 0px;
-  border: 0px; }
+  padding: 0;
+  margin: 0;
+  border: 0; }
 
 *,
 *:before,
@@ -87,15 +87,9 @@ body {
 
 body {
   line-height: 1;
-  font-family: "Raleway";
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%; }
-
-input,
-button,
-textarea {
-  font-family: "Raleway"; }
 
 input::-ms-clear {
   display: none; }
@@ -919,6 +913,10 @@ body.ie ._ibg img {
 .section {
   height: 100vh;
   min-height: 700px; }
+  .section.hidden {
+    visibility: hidden;
+    height: 0;
+    min-height: 0; }
 
 .section-inner {
   display: flex;

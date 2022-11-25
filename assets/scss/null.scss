@@ -1,7 +1,7 @@
 * {
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
+	padding: 0;
+	margin: 0;
+	border: 0;
 }
 *,
 *:before,
@@ -28,12 +28,10 @@ section {
 html,
 body {
 	height: 100%;
-	min-width: $minWidth;
+	min-width: 320px;
 }
 body {
 	line-height: 1;
-	font-family: $fontFamily;
-	//text-rendering: optimizeLegibility;
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -41,7 +39,6 @@ body {
 input,
 button,
 textarea {
-	font-family: $fontFamily;
 }
 input::-ms-clear {
 	display: none;

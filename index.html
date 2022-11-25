@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Olcha Travel</title>
   <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-scrollto"></script>
   <link rel="stylesheet" href="./assets/scss/style.css" />
 </head>
 <body>
@@ -68,17 +69,16 @@
         <div class="content">
           <h1 class="h1">ТОП-5 самых красивых путешествий:</h1>
           <div class="btn-links">
-            <button class="btn" @click="slideTo(1)">Египет</button>
-            <button class="btn" @click="slideTo(1)">Турция</button>
-            <button class="btn" @click="slideTo(1)">ОАЭ</button>
-            <button class="btn" @click="slideTo(1)">Вьетнам</button>
-            <button class="btn" @click="slideTo(1)">Грузия</button>
-            <button class="btn" @click="slideTo(1)">Европа</button>
-            <button class="btn" @click="slideTo(1)">Другая страна</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Египет</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Турция</button>
+            <button class="btn" @click="slideTo(1); setCountry();">ОАЭ</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Вьетнам</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Грузия</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Европа</button>
+            <button class="btn" @click="slideTo(1); setCountry();">Другая страна</button>
           </div>
         </div>
       </div>
-      <a class="button" data-slide="1" title="" style="display: none;"></a>
     </section>
     <!-- Конец главного экрана -->
     <section class="slide section section2 hidden" id="slide2" data-slide="1">
@@ -88,7 +88,7 @@
             <h2 class="content__title">Выберите один из турпакетов в Турцию</h2>
             <div class="content__text">
               <form action="">
-                <div class="checkbox__block">
+                <div class="checkbox__block" @click="check(1)">
                   <label class="radio">
                     <input class="radio__input" name="tour" type="radio" />
                     <span class="radio__bg"></span>
@@ -143,8 +143,8 @@
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="0">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="2" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(0)">Назад</button>
+              <button class="btn btn-red btn-disabled" @click="slideTo(2)" disabled>Следующий</button>
             </div>
           </div>
         </div>
@@ -152,7 +152,6 @@
           <img src="./assets/img/bg/2.jpg" alt="" />
         </div>
       </div>
-      <a class="button" data-slide="2" title="" style="display: none;"></a>
     </section>
     <section class="slide section section2 hidden" id="slide3" data-slide="2">
       <div class="section-inner _container">
