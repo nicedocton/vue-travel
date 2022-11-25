@@ -5,11 +5,13 @@ const App = {
 		}
 	},
 	mounted() {
-		testFunc
+		slideTo
 	},
 	methods: {
-		testFunc: (e) => {
-			console.log(e);
+		slideTo: (e) => {
+			const elem = document.querySelector('[data-slide="' + e + '"]');
+			elem.classList.remove('hidden');
+			elem.scrollIntoView({behavior: "smooth"});
 		}
 	}
 }
