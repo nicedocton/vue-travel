@@ -196,7 +196,7 @@ body {
     &__text {
       width: 434px;
       min-height: 200px;
-      max-height: 373px;
+      max-height: 375px;
       overflow-y: auto;
     }
     &__btns {
@@ -642,6 +642,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
+  .slideBG {
+    display: none;
+  }
   @media(min-width: 1200px) {
     background: none!important;
   }
@@ -657,6 +660,19 @@ body {
       z-index: 1;
       top: 0;
       left: 0;
+    }
+    .slideBG {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }

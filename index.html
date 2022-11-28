@@ -82,78 +82,90 @@
     </section>
     <!-- Конец главного экрана -->
     <section class="slide section section2 hidden" id="slide2" data-slide="1">
+      <div class="slideBG">
+        <img
+          v-if="selectedTour"
+          :src="tourPack[selectedTour - 1].imageUrl"
+          alt=""
+        />
+        <img
+          v-else
+          src="./assets/img/bg/2.jpg"
+          alt=""
+        />
+      </div>
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
             <h2 class="content__title">Выберите один из турпакетов в Турцию</h2>
             <div class="content__text">
               <form action="">
-                <div class="checkbox__block" @click="check(1)">
+                <div
+                  v-for="tour in tourPack"
+                  class="checkbox__block"
+                  :class="{ _active: tour.id === selectedTour}"
+                  :key="tour.id"
+                  @click="setCountry(tour.id)"
+                >
                   <label class="radio">
-                    <input class="radio__input" name="tour" type="radio" />
+                    <input
+                      class="radio__input"
+                      name="tour"
+                      type="radio"
+                      :checked="tour.id == selectedTour"
+                    />
                     <span class="radio__bg"></span>
                   </label>
                   <div class="checkbox__block-image">
-                    <img src="./assets/img/bg/3.jpg" alt="" />
+                    <img :src="tour.imageUrl" alt="" />
                   </div>
                   <div class="checkbox__block-description">
-                    <div class="checkbox__block-text">Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей</div>
-                    <div class="checkbox__block-price">от $2 800</div>
-                  </div>
-                </div>
-                <div class="checkbox__block">
-                  <label class="radio">
-                    <input class="radio__input" name="tour" type="radio" />
-                    <span class="radio__bg"></span>
-                  </label>
-                  <div class="checkbox__block-image">
-                    <img src="./assets/img/bg/4.jpg" alt="" />
-                  </div>
-                  <div class="checkbox__block-description">
-                    <div class="checkbox__block-text">Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей</div>
-                    <div class="checkbox__block-price">от $2 800</div>
-                  </div>
-                </div>
-                <div class="checkbox__block">
-                  <label class="radio">
-                    <input class="radio__input" name="tour" type="radio" />
-                    <span class="radio__bg"></span>
-                  </label>
-                  <div class="checkbox__block-image">
-                    <img src="./assets/img/bg/5.jpg" alt="" />
-                  </div>
-                  <div class="checkbox__block-description">
-                    <div class="checkbox__block-text">Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей</div>
-                    <div class="checkbox__block-price">от $2 800</div>
-                  </div>
-                </div>
-                <div class="checkbox__block">
-                  <label class="radio">
-                    <input class="radio__input" name="tour" type="radio" />
-                    <span class="radio__bg"></span>
-                  </label>
-                  <div class="checkbox__block-image">
-                    <img src="./assets/img/bg/6.jpg" alt="" />
-                  </div>
-                  <div class="checkbox__block-description">
-                    <div class="checkbox__block-text">Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей</div>
-                    <div class="checkbox__block-price">от $2 800</div>
+                    <div class="checkbox__block-text">{{ tour.title }}</div>
+                    <div class="checkbox__block-price">{{ tour.price }}</div>
                   </div>
                 </div>
               </form>
             </div>
             <div class="content__btns">
               <button class="btn btn-simple" @click="slideTo(0)">Назад</button>
-              <button class="btn btn-red btn-disabled" @click="slideTo(2)" disabled>Следующий</button>
+              <button
+                class="btn btn-red"
+                :class="selectedTour ? '' : 'btn-disabled'"
+                @click="slideTo(2)"
+                :disabled="!selectedTour"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
         <div class="bg-content _slide2">
-          <img src="./assets/img/bg/2.jpg" alt="" />
+          <img
+            v-if="selectedTour"
+            :src="tourPack[selectedTour - 1].imageUrl"
+            alt=""
+          />
+          <img
+              v-else
+              src="./assets/img/bg/2.jpg"
+              alt=""
+          />
         </div>
       </div>
     </section>
     <section class="slide section section2 hidden" id="slide3" data-slide="2">
+      <div class="slideBG">
+        <img
+          v-if="selectedCount"
+          :src="touristsCount[selectedCount - 1].imageUrl"
+          alt=""
+        />
+        <img
+          v-else
+          src="./assets/img/bg/3.jpg"
+          alt=""
+        />
+      </div>
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
@@ -162,52 +174,51 @@
             <div class="content__text">
               <form action="">
                 <div class="tourList">
-                  <div class="tourList__item" data-img="./assets/img/bg/4.jpg">
+                  <div
+                    v-for="tCount in touristsCount"
+                    class="tourList__item"
+                    :class="{ _active: tCount.id === selectedCount}"
+                    :key="tCount.id"
+                    @click="setCount(tCount.id)"
+                  >
                     <label class="radio">
-                      <input type="radio" name="tourlist" class="radio__input">
+                      <input
+                        type="radio"
+                        name="tourlist"
+                        class="radio__input"
+                        :checked="tCount.id == selectedCount"
+                      />
                       <span class="radio__bg"></span>
-                      <span class="radio__text">Семейный тур (с детьми)</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/5.jpg">
-                    <label class="radio">
-                      <input type="radio" name="tourlist" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Для двоих</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/6.jpg">
-                    <label class="radio">
-                      <input type="radio" name="tourlist" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Отдыхаю один/одна</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/7.jpg">
-                    <label class="radio">
-                      <input type="radio" name="tourlist" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Отдых с друзьями</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/1.jpg">
-                    <label class="radio">
-                      <input type="radio" name="tourlist" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Другой вариант</span>
+                      <span class="radio__text">{{ tCount.title }}</span>
                     </label>
                   </div>
                 </div>
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="1">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="3" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(1)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedCount ? '' : 'btn-disabled'"
+                  @click="slideTo(3)"
+                  :disabled="!selectedCount"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
         <div class="bg-content _slide3">
-          <img src="./assets/img/bg/3.jpg" alt="" />
+          <img
+            v-if="selectedCount"
+            :src="touristsCount[selectedCount - 1].imageUrl"
+            alt=""
+          />
+          <img
+            v-else
+            src="./assets/img/bg/3.jpg"
+            alt=""
+          />
         </div>
       </div>
     </section>
