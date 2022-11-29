@@ -81,7 +81,9 @@
       </div>
     </section>
     <!-- Конец главного экрана -->
-    <section class="slide section section2 hidden" id="slide2" data-slide="1">
+  
+    <!-- Выбор опции турпакета -->
+    <section class="slide section" id="slide2" data-slide="1">
       <div class="slideBG">
         <img
           v-if="selectedTour"
@@ -121,7 +123,7 @@
                   </div>
                   <div class="checkbox__block-description">
                     <div class="checkbox__block-text">{{ tour.title }}</div>
-                    <div class="checkbox__block-price">{{ tour.price }}</div>
+                    <div class="checkbox__block-price">от ${{ tour.price }}</div>
                   </div>
                 </div>
               </form>
@@ -153,7 +155,7 @@
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide3" data-slide="2">
+    <section class="slide section" id="slide3" data-slide="2">
       <div class="slideBG">
         <img
           v-if="selectedCount"
@@ -222,7 +224,19 @@
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide4" data-slide="3">
+    <section class="slide section" id="slide4" data-slide="3">
+      <div class="slideBG">
+        <img
+            v-if="selectedHotel"
+            :src="hotelList[selectedHotel - 1].imageUrl"
+            alt=""
+        />
+        <img
+            v-else
+            src="./assets/img/bg/5.jpg"
+            alt=""
+        />
+      </div>
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
@@ -230,49 +244,67 @@
             <div class="content__text">
               <form action="">
                 <div class="tourList">
-                  <div class="tourList__item" data-img="./assets/img/bg/5.jpg">
+                  <div
+                    v-for="hotel in hotelList"
+                    class="tourList__item"
+                    :class="{ _active: hotel.id === selectedHotel }"
+                    :key="hotel.id"
+                    @click="setHotel(hotel.id)"
+                  >
                     <label class="radio">
-                      <input type="radio" class="radio__input">
+                      <input
+                        type="radio"
+                        name="tourlist"
+                        class="radio__input"
+                        :checked="hotel.id == selectedHotel"
+                      />
                       <span class="radio__bg"></span>
-                      <span class="radio__text">Пляжный отдых, спокойный отдых</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/6.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Пляжный отдых + активные развлечения</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/7.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Городской отдых + экскурс</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/1.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Другие пожелания</span>
+                      <span class="radio__text">{{ hotel.title }}</span>
                     </label>
                   </div>
                 </div>
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="2">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="4" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(2)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedHotel ? '' : 'btn-disabled'"
+                  @click="slideTo(4)"
+                  :disabled="!selectedHotel"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
         <div class="bg-content _slide4">
-          <img src="./assets/img/bg/4.jpg" alt="" />
+          <img
+            v-if="selectedHotel"
+            :src="hotelList[selectedHotel - 1].imageUrl"
+            alt=""
+          />
+          <img
+            v-else
+            src="./assets/img/bg/5.jpg"
+            alt=""
+          />
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide5" data-slide="4">
+    <section class="slide section" id="slide5" data-slide="4">
+      <div class="slideBG">
+        <img
+            v-if="selectedHotelType"
+            :src="hotelType[selectedHotelType - 1].imageUrl"
+            alt=""
+        />
+        <img
+            v-else
+            src="./assets/img/bg/6.jpg"
+            alt=""
+        />
+      </div>
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
@@ -280,56 +312,70 @@
             <div class="content__text">
               <form action="">
                 <div class="tourList">
-                  <div class="tourList__item" data-img="./assets/img/bg/6.jpg">
+                  <div
+                      v-for="type in hotelType"
+                      class="tourList__item"
+                      :class="{ _active: type.id === selectedHotelType }"
+                      :key="type.id"
+                      @click="setHotelType(type.id)"
+                  >
                     <label class="radio">
-                      <input type="radio" class="radio__input">
+                      <input
+                          type="radio"
+                          name="typelist"
+                          class="radio__input"
+                          :checked="type.id == selectedHotelType"
+                      />
                       <span class="radio__bg"></span>
-                      <span class="radio__text">5 <i class="icon-rate _rate5"></i></span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/1.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">4 <i class="icon-rate _rate4"></i></span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/1.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">3 <i class="icon-rate _rate3"></i></span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/2.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Любой</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Другой вариант</span>
+                      <span class="radio__text">
+                        {{ type.title }}
+                        <i v-if="type.rate" class="icon-rate _rate5" :class="'_rate' + type.rate"></i>
+                      </span>
                     </label>
                   </div>
                 </div>
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="3">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="5" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(3)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedHotelType ? '' : 'btn-disabled'"
+                  @click="slideTo(5)"
+                  :disabled="!selectedHotelType"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
         <div class="bg-content _slide5">
-          <img src="./assets/img/bg/5.jpg" alt="" />
+          <img
+            v-if="selectedHotelType"
+            :src="hotelType[selectedHotelType - 1].imageUrl"
+            alt=""
+          />
+          <img
+            v-else
+            src="./assets/img/bg/5.jpg"
+            alt=""
+          />
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide6" data-slide="5">
+    <section class="slide section" id="slide6" data-slide="5">
+      <div class="slideBG">
+        <img
+          v-if="selectedHotelType"
+          :src="hotelType[selectedHotelType - 1].imageUrl"
+          alt=""
+        />
+        <img
+          v-else
+          src="./assets/img/bg/5.jpg"
+          alt=""
+        />
+      </div>
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
@@ -337,60 +383,63 @@
             <div class="content__text">
               <form action="">
                 <div class="tourList">
-                  <div class="tourList__item" data-img="./assets/img/bg/7.jpg">
+                  <div
+                    v-for="days in numberOfDays"
+                    class="tourList__item"
+                    :class="{ _active: days.id === selectedDays }"
+                    :key="days.id"
+                    @click="setDays(days.id)"
+                  >
                     <label class="radio">
-                      <input type="radio" class="radio__input">
+                      <input
+                        type="radio"
+                        name="typelist"
+                        class="radio__input"
+                        :checked="days.id == selectedDays"
+                      />
                       <span class="radio__bg"></span>
-                      <span class="radio__text">5 дней</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/1.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">от 5 до 7 дней</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/2.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">от 7 до 10 дней</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/3.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">от 10 до 15 дней</span>
-                    </label>
-                  </div>
-                  <div class="tourList__item" data-img="./assets/img/bg/4.jpg">
-                    <label class="radio">
-                      <input type="radio" class="radio__input">
-                      <span class="radio__bg"></span>
-                      <span class="radio__text">Другое</span>
+                      <span class="radio__text">
+                        {{ days.title }}
+                      </span>
                     </label>
                   </div>
                 </div>
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="4">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="6" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(4)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedDays ? '' : 'btn-disabled'"
+                  @click="slideTo(6)"
+                  :disabled="!selectedDays"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
         <div class="bg-content _slide6">
-          <img src="./assets/img/bg/5.jpg" alt="" />
+          <img
+            v-if="selectedHotelType"
+            :src="hotelType[selectedHotelType - 1].imageUrl"
+            alt=""
+          />
+          <img
+            v-else
+            src="./assets/img/bg/5.jpg"
+            alt=""
+          />
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide7" data-slide="6">
+    
+    <!-- Калькулятор -->
+    <section class="slide section" id="slide7" data-slide="6">
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
-            <h2 class="content__title">Ваши предполагаемые расходы: <span>$1 250</span></h2>
+            <h2 class="content__title">Ваши предполагаемые расходы: <span>${{ totalPrice }}</span></h2>
             <div class="content__text">
               <form action="">
                 <div class="estimated-expenses">
@@ -412,8 +461,13 @@
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="1">Изменить</button>
-              <button class="btn btn-red" data-slide="7">БРОНИРОВАТЬ</button>
+              <button class="btn btn-simple" @click="slideTo(1)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  @click="slideTo(7)"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
@@ -422,7 +476,9 @@
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide8" data-slide="7">
+    <!-- Конец калькулятора -->
+    
+    <section class="slide section" id="slide8" data-slide="7">
       <div class="section-inner _container">
         <div class="content">
           <div class="content__form">
@@ -468,8 +524,15 @@
               </form>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="6">Назад</button>
-              <button class="btn btn-red btn-disabled" data-slide="8" disabled>Следующий</button>
+              <button class="btn btn-simple" @click="slideTo(6)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedDays ? '' : 'btn-disabled'"
+                  @click="slideTo(8)"
+                  :disabled="!selectedDays"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
@@ -478,7 +541,7 @@
         </div>
       </div>
     </section>
-    <section class="slide section section2 hidden" id="slide9" data-slide="8">
+    <section class="slide section" id="slide9" data-slide="8">
       <div class="section-inner _container">
         <div class="payment">
           <div class="payment__inner">
@@ -495,8 +558,14 @@
               </button>
             </div>
             <div class="content__btns">
-              <button class="btn btn-simple" data-slide="0">ГЛАВНЫЙ</button>
-              <button class="btn btn-red">ДАЛЕЕ</button>
+              <button class="btn btn-simple" @click="slideTo(0)">Назад</button>
+              <button
+                  class="btn btn-red"
+                  :class="selectedDays ? '' : 'btn-disabled'"
+                  :disabled="!selectedDays"
+              >
+                Следующий
+              </button>
             </div>
           </div>
         </div>
