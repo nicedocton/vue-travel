@@ -2,12 +2,17 @@ const App = {
 	data() {
 		return {
 			count: 1,
-			selectedTour: null,
-			selectedCount: null,
-			selectedHotel: null,
-			selectedHotelType: null,
-			selectedDays: null,
-			totalPrice: 0,
+			loaded: true,
+			booking: false,
+			payment: false,
+			selectedCountry: 0,
+			selectedTour: 0,
+			selectedCount: 0,
+			selectedHotel: 0,
+			selectedHotelType: 0,
+			selectedDays: 0,
+			selectedPayment: 0,
+			countries: [],
 			tourPack: [
 				{
 					id: 1,
@@ -160,39 +165,63 @@ const App = {
 					title: "Другое",
 					price: 20
 				},
+			],
+			paymentTypes: [
+				{
+					id: 1,
+					name: 'Click',
+					imageUrl: './assets/img/click.png'
+				},
+				{
+					id: 2,
+					name: 'Payme',
+					imageUrl: './assets/img/payme.png'
+				}
 			]
 		}
 	},
 	computed: {
-		totalPrice () {
-			this.totalPrice = ((this.selectedTour * this.touristsCount) + (this.selectedHotel + this.selectedHotelType)) * this.selectedDays
+		totalPrice: function() {
+			return ((this.selectedTour.price * (this.selectedHotel.price + this.selectedHotelType.price)) * this.selectedDays.price)
 		}
 	},
 	methods: {
-		slideTo: (e) => {
-			const elem = document.querySelector('.section[data-slide="' + e + '"]');
-			VueScrollTo.scrollTo(elem, 1000)
-		},
 		setCountry(item) {
+			this.selectedCountry = item;
+		},
+		setTour(item) {
 			this.selectedTour = item;
-			console.log(this.selectedTour)
 		},
 		setCount(item) {
 			this.selectedCount = item;
-			console.log(this.selectedCount)
 		},
 		setHotel(item) {
 			this.selectedHotel = item;
-			console.log(this.selectedHotel)
 		},
 		setHotelType(item) {
 			this.selectedHotelType = item;
-			console.log(this.selectedHotelType)
 		},
 		setDays(item) {
 			this.selectedDays = item;
-			console.log(this.selectedDays)
-		}
+		},
+		setPayment(item) {
+			this.selectedPayment = item;
+		},
+		slideTo: (e) => {
+			const elem = document.querySelector('.section[data-slide="' + e + '"]');
+			VueScrollTo.scrollTo(elem,1000)
+		},
+	},
+	mounted() {
+		this.loaded = false;
+		console.log('shit');
+		fetch('./data/db.json')
+			.then(res => res.json())
+			.then(
+				data => this.countries = data.countries,
+				this.loaded = false
+			)
+			.catch(error => console.log('Ошибка! Нет доступа к Api. ' + error));
 	}
 }
 
