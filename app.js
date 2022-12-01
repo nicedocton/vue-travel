@@ -8,7 +8,7 @@ const App = {
 			lastScroll: 0,
 			sectionHeight: 100,
 			isActive: false,
-			langList: null,
+			langList: 0,
 			selectedCountry: 0,
 			selectedTour: 0,
 			selectedCount: 0,
@@ -17,12 +17,12 @@ const App = {
 			selectedDays: 0,
 			selectedPayment: 0,
 			countries: 0,
-			tourPack: null,
-			touristsCount: null,
-			hotelList: null,
-			hotelType: null,
-			numberOfDays: null,
-			paymentTypes: null
+			tourPack: 0,
+			touristsCount: 0,
+			hotelList: 0,
+			hotelType: 0,
+			numberOfDays: 0,
+			paymentTypes: 0
 		}
 	},
 	computed: {
@@ -85,7 +85,7 @@ const App = {
 				this.paymentTypes = data.paymentTypes
 				
 			})
-			.catch(error => console.log('Ошибка! Нет доступа к Api. ' + error));fetch('./data/db.json')
+			.catch(error => console.log('Ошибка! Нет доступа к Api. ' + error));
 	},
 	onBeforeUnmount() {
 		window.removeEventListener('scroll', checkScrolling)
