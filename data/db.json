@@ -39,19 +39,19 @@
     {
       "id": 2,
       "title": "Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей",
-      "price": 2000,
+      "price": 1100,
       "imageUrl": "./assets/img/bg/4.jpg"
     },
     {
       "id": 3,
       "title": "Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей",
-      "price": 3000,
+      "price": 1200,
       "imageUrl": "./assets/img/bg/5.jpg"
     },
     {
       "id": 4,
       "title": "Путешествие сквозь время в Эр-Рияд & Аль-Ула. Эр-Рияд & Аль-Ула 5 ночей",
-      "price": 4000,
+      "price": 1500,
       "imageUrl": "./assets/img/bg/6.jpg"
     }
   ],
@@ -92,25 +92,25 @@
       "id": 1,
       "imageUrl": "./assets/img/bg/4.jpg",
       "title": "Пляжный отдых, спокойный отдых",
-      "price": 2000
+      "price": 200
     },
     {
       "id": 2,
       "imageUrl": "./assets/img/bg/5.jpg",
       "title": "Пляжный отдых + активные развлечения",
-      "price": 1500
+      "price": 100
     },
     {
       "id": 3,
       "imageUrl": "./assets/img/bg/6.jpg",
       "title": "Городской отдых + экскурс",
-      "price": 1300
+      "price": 30
     },
     {
       "id": 4,
       "imageUrl": "./assets/img/bg/7.jpg",
       "title": "Другие пожелания",
-      "price": 1000
+      "price": 100
     }
   ],
   "hotelType": [
@@ -119,35 +119,35 @@
       "imageUrl": "./assets/img/bg/5.jpg",
       "title": 5,
       "rate": 5,
-      "price": 500
+      "price": 100
     },
     {
       "id": 2,
       "imageUrl": "./assets/img/bg/6.jpg",
       "title": 4,
       "rate": 4,
-      "price": 800
+      "price": 80
     },
     {
       "id": 3,
       "imageUrl": "./assets/img/bg/7.jpg",
       "title": 3,
       "rate": 3,
-      "price": 1000
+      "price": 60
     },
     {
       "id": 4,
       "imageUrl": "./assets/img/bg/1.jpg",
       "title": "Любой",
       "rate": null,
-      "price": 1500
+      "price": 40
     },
     {
       "id": 5,
       "imageUrl": "./assets/img/bg/2.jpg",
       "title": "Другой вариант",
       "rate": null,
-      "price": 2000
+      "price": 20
     }
   ],
   "numberOfDays": [

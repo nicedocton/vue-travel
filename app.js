@@ -27,7 +27,7 @@ const App = {
 	},
 	computed: {
 		totalPrice: function() {
-			return ((this.selectedTour.price * (this.selectedHotel.price + this.selectedHotelType.price)) * this.selectedDays.price)
+			return ((this.selectedTour.price + (this.selectedHotel.price + this.selectedHotelType.price)) + this.selectedDays.price)
 		}
 	},
 	methods: {
