@@ -5,6 +5,10 @@ const App = {
 			loaded: true,
 			booking: false,
 			payment: false,
+			lastScroll: 0,
+			sectionHeight: 100,
+			isActive: false,
+			langList: null,
 			selectedCountry: 0,
 			selectedTour: 0,
 			selectedCount: 0,
@@ -211,10 +215,21 @@ const App = {
 			const elem = document.querySelector('.section[data-slide="' + e + '"]');
 			VueScrollTo.scrollTo(elem,1000)
 		},
+		clickOutSide(e) {
+			if (!this.langList.value.contains(e.target)) {
+				this.isActive.value = false
+			}
+		},
+		checkScrolling() {
+			if (typeof window !== 'undefined') {
+				this.sectionHeight = document.getElementById('slide1')?.getBoundingClientRect().height - 100
+			}
+			this.lastScroll = window.scrollY
+		}
 	},
 	mounted() {
+		window.addEventListener('scroll', this.checkScrolling)
 		this.loaded = false;
-		console.log('shit');
 		fetch('./data/db.json')
 			.then(res => res.json())
 			.then(
@@ -222,6 +237,9 @@ const App = {
 				this.loaded = false
 			)
 			.catch(error => console.log('Ошибка! Нет доступа к Api. ' + error));
+	},
+	onBeforeUnmount() {
+		window.removeEventListener('scroll', checkScrolling)
 	}
 }
 

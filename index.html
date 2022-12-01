@@ -34,7 +34,7 @@
     </template>
     <template v-else>
       <!-- Шапка сайта -->
-      <header class="header">
+      <header class="header" :class="lastScroll > sectionHeight ? 'dark-menu' : 'light-menu'">
         <div class="header__inner _container">
           <a href="#" class="header__logo" data-slide="0">
             <svg viewBox="0 0 102 30" xmlns="http://www.w3.org/2000/svg">
@@ -619,15 +619,18 @@
       <!-- Конец оплаты -->
   
       <!-- Футер сайта -->
-      <footer class="footer">
+      <footer class="footer" :class="lastScroll > sectionHeight ? 'dark-menu' : 'light-menu'">
         <div class="footer__inner _container">
           <div class="footer__copy">
             &copy; 2022 HappyHour
             <a href="#">Privacy</a>
             <a href="#">Help</a>
           </div>
-          <div class="footer__lang lang">
-            <a class="lang__btn" href="#">Ру</a>
+          <div
+            class="footer__lang lang"
+            :class="isActive ? '_active' : ''"
+          >
+            <button class="lang__btn" @click="isActive = !isActive">Ру</button>
             <ul>
               <li><a href="#">Uz</a></li>
               <li><a href="#">Уз</a></li>
