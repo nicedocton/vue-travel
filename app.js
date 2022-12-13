@@ -22,15 +22,33 @@ const App = {
 			hotelList: 0,
 			hotelType: 0,
 			numberOfDays: 0,
-			paymentTypes: 0
+			paymentTypes: 0,
+			merch_id: '5e8ef22af404cf625d16f675',
+			rate: 11300,
+			dataForm: {
+				url: '',
+				fields: {
+				
+				}
+			}
 		}
 	},
 	computed: {
-		totalPrice: function() {
-			return ((this.selectedTour.price + (this.selectedHotel.price + this.selectedHotelType.price)) + this.selectedDays.price)
+		totalPrice() {
+			return (this.selectedTour.price + (this.selectedHotel.price + this.selectedHotelType.price)) + this.selectedDays.price
 		}
 	},
 	methods: {
+		setPaymentGo(item) {
+			const amount = this.totalPrice * this.rate * 100
+			const hash = window.btoa(`m=${this.merch_id};ac.order_id=262921a;a=${1000000}`)
+			if (item === 1) {
+				window.open('https://my.click.uz/services/pay')
+			}
+			if (item === 2) {
+				window.open(`https://checkout.paycom.uz/${hash}`)
+			}
+		},
 		setCountry(item) {
 			this.selectedCountry = item;
 		},
@@ -54,8 +72,9 @@ const App = {
 		},
 		slideTo: (e) => {
 			const elem = document.querySelector('.section[data-slide="' + e + '"]');
-			VueScrollTo.scrollTo(elem,1000)
+			VueScrollTo.scrollTo(elem, 1000)
 		},
+		
 		clickOutSide(e) {
 			if (!this.langList.value.contains(e.target)) {
 				this.isActive.value = false
@@ -67,6 +86,7 @@ const App = {
 			}
 			this.lastScroll = window.scrollY
 		}
+		
 	},
 	mounted() {
 		window.addEventListener('scroll', this.checkScrolling)

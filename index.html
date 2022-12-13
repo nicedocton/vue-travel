@@ -600,10 +600,17 @@
                 </div>
                 <div class="content__btns">
                   <button class="btn btn-simple" @click="slideTo(7)">Назад</button>
+                  <form :action="">
+                    <input
+                        v-for=""
+                        type="hidden" :value="value" :name="key">
+                  </form>
                   <button
                       class="btn btn-red"
                       :class="selectedPayment ? '' : 'btn-disabled'"
                       :disabled="!selectedPayment"
+                      @click="setPaymentGo(selectedPayment.id)"
+            
                   >
                     Следующий
                   </button>
@@ -613,6 +620,7 @@
           </div>
         </template>
       </section>
+      
       <!-- Конец оплаты -->
   
       <!-- Футер сайта -->
