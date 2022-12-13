@@ -187,11 +187,6 @@
       "id": 1,
       "name": "Click",
       "imageUrl": "./assets/img/click.png"
-    },
-    {
-      "id": 2,
-      "name": "Payme",
-      "imageUrl": "./assets/img/payme.png"
     }
   ]
 }

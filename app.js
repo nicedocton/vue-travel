@@ -24,11 +24,17 @@ const App = {
 			numberOfDays: 0,
 			paymentTypes: 0,
 			merch_id: '5e8ef22af404cf625d16f675',
+			click: {
+				service_id: '16198',
+				merchant_id: '11665',
+				user_id: '16932',
+				transaction_param: '306239a'
+			},
 			rate: 11300,
 			dataForm: {
 				url: '',
 				fields: {
-				
+
 				}
 			}
 		}
@@ -40,12 +46,14 @@ const App = {
 	},
 	methods: {
 		setPaymentGo(item) {
-			const amount = this.totalPrice * this.rate * 100
-			const hash = window.btoa(`m=${this.merch_id};ac.order_id=262921a;a=${1000000}`)
+
 			if (item === 1) {
-				window.open('https://my.click.uz/services/pay')
+				const amount = this.totalPrice * this.rate
+				window.open(`https://my.click.uz/services/pay?service_id=${this.click.service_id}&merchant_id=${this.click.merchant_id}&amount=${amount}&transaction_param=${this.click.transaction_param}`)
 			}
 			if (item === 2) {
+				const amount = this.totalPrice * this.rate * 100
+				const hash = window.btoa(`m=${this.merch_id};ac.order_id=262921a;a=${amount}`)
 				window.open(`https://checkout.paycom.uz/${hash}`)
 			}
 		},
@@ -74,7 +82,7 @@ const App = {
 			const elem = document.querySelector('.section[data-slide="' + e + '"]');
 			VueScrollTo.scrollTo(elem, 1000)
 		},
-		
+
 		clickOutSide(e) {
 			if (!this.langList.value.contains(e.target)) {
 				this.isActive.value = false
@@ -86,7 +94,7 @@ const App = {
 			}
 			this.lastScroll = window.scrollY
 		}
-		
+
 	},
 	mounted() {
 		window.addEventListener('scroll', this.checkScrolling)
@@ -103,7 +111,7 @@ const App = {
 				this.hotelType = data.hotelType
 				this.numberOfDays = data.numberOfDays
 				this.paymentTypes = data.paymentTypes
-				
+
 			})
 			.catch(error => console.log('Ошибка! Нет доступа к Api. ' + error));
 	},
